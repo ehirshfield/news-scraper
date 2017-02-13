@@ -1,0 +1,37 @@
+{
+  "name": "news-scraper",
+  "version": "1.0.0",
+  "description": "Cheerio web application that scrapes a news site and saves the results using MongoDB",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ehirshfield/news-scraper.git"
+  },
+  "keywords": [
+    "cheerio",
+    "node",
+    "mongodb",
+    "scrape",
+    "scraper",
+    "news"
+  ],
+  "author": "Eric Hirshfield-Yamanishi",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ehirshfield/news-scraper/issues"
+  },
+  "homepage": "https://github.com/ehirshfield/news-scraper#readme",
+  "dependencies": {
+    "body-parser": "^1.16.1",
+    "cheerio": "^0.22.0",
+    "express": "^4.14.1",
+    "express-handlebars": "^3.0.0",
+    "mongoose": "^4.8.2",
+    "morgan": "^1.8.1",
+    "request": "^2.79.0"
+  }
+}
