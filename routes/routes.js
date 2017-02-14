@@ -19,11 +19,11 @@ app.get("/home", function(req,res){
 
     res.render("home");
 
-})
+});
 
 //Scrape function
 app.get("/scrape", function(req, res){
-    request("https://www.reddit.com/r/gaming", function(error, response, html) {
+    request("https://www.reddit.com/r/aww", function(error, response, html) {
 
       if (error){
         console.log(error)
@@ -36,41 +36,49 @@ app.get("/scrape", function(req, res){
         var result = [];
 
         // With cheerio, find each h4-tag with the class "headline-link"
-        $("p.title").each(function(i, element) {
+        $("div.thing").each(function(i, element) {
 
-          var result = {};
+
           // Save the text of the h4-tag as "title"
-          result.title = $(this).text();
+          var title= $(element).children('div.entry').children('p.title').text();
 
           // Find the h4 tag's parent a-tag, and save it's href value as "link"
-          result.link = $(element).children().attr("href");
+          var link = $(element).children('a.thumbnail').attr("href");
+
+          var thumbnail = $(element).children('a.thumbnail').children().attr("src");
 
           // For each h4-tag, make an object with data we scraped and push it to the result array
-          var entry = new Article(result);
-
-          entry.save(function(err, doc){
-            if (err){
-              console.log(err);
-            }
-            else{
-              console.log(doc);
-            }
+          result.push({
+            title: title,
+            link: link,
+            thumbnail: thumbnail
           });
 
         });
+
+
+        console.log(result);
+        res.json(result);
       }
-
-
     });
-    res.redirect("/home");
+
   });
 
-app.get("/save", function(req, res){
+app.post("/save", function(req, res){
 
-});
+    console.log(req.body);
+    var newArticle = new Article(req.body);
 
+    newArticle.save(function(error, docs){
+      if (error){
+        console.log(error);
+      }
+      else{
+        console.log("success!");
+      }
+    });
+  });
 
 
 
 }
-// Making a request call for nhl.com's homepage
