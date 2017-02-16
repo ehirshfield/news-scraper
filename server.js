@@ -8,6 +8,8 @@ var Promise = require("bluebird");
 
 mongoose.Promise = Promise;
 
+var PORT = 3000;
+
 var app = express();
 
 // Use morgan and body parser with our app
@@ -18,8 +20,11 @@ app.use(bodyParser.urlencoded({
 
 app.use(express.static(path.join(__dirname, '/public')));
 
+var options = { server: { socketOptions: { keepAlive: 300000, connectTimeoutMS: 30000 } },
+               replset: { socketOptions: { keepAlive: 300000, connectTimeoutMS : 30000 } } };
+
 // Database configuration with mongoose
-mongoose.connect("mongodb://heroku_6ql27mx9:fqo5abimhif9bdpf69qbeeov1k@ds153729.mlab.com:53729/heroku_6ql27mx9");
+mongoose.connect("mongodb://heroku_6ql27mx9:fqo5abimhif9bdpf69qbeeov1k@ds153729.mlab.com:53729/heroku_6ql27mx9", options);
 var db = mongoose.connection;
 
 // Show any mongoose errors
@@ -38,6 +43,6 @@ app.set('view engine', 'handlebars');
 
 require("./routes/routes.js")(app);
 
-app.listen(3000, function() {
+app.listen(PORT, function() {
   console.log("App running on port 3000!");
 });
