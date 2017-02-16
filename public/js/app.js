@@ -46,41 +46,82 @@ $(document).ready(function(){
 
   });
 
-  $('.deleteBtn').on("click", function(){
-    getRecordID();
-  });
-
-
-
   $('.noteBtn').on('show.bs.modal', function (event) {
+    $('.comment-section').empty();
     var button = $(event.relatedTarget) // Button that triggered the modal
     var title = button.parent().children('h2').text();
     var articleID = button.parent().children('h2').attr('data-id');
     var modal = $(this);
     //AJAX request for all the comments
-    $.get("/api/articles/:id", {
-      _id: articleID
+    $.ajax({
+    method: "GET",
+    url: "/articles/" + articleID
     })
     .done(function(response){
+        console.log(response.comment[0]);
+        for (i=0; i< response.comment.length; i++){
+          var comment = response.comment[i].comment;
+          modal.find('.comment-section')
+          .prepend("<div class='commentDiv'><p class='inlineTry pComment' >" + comment + "</p><button class='btn btn-warning deleteCommentBtn inlineTry' data-dismiss='modal' data-comment-id="+response.comment[i]._id+">X</button></div>");
 
-      for (i=0; i < response.length; i++){
-        console.log(response[i].comment);
-        var comment = response[i].comment;
-        modal.find('.modal-body')
-        .append("<p>" + comment + "</p>")
-        .append("<button class='btn btn-warning deleteBtn'>X</button>")
+        }
+        $('.inlineTry').css('display', 'inline-block');
+        $('.pComment').css('margin-right', '10px');
+
+      });
+      modal.find('.modal-title').text('Comments for ' + title)
+
+
+    $('.addNoteBtn').on('click', function(){
+      var newNote = $("#comment-text").val().trim();
+      if (newNote === "") {
+        return;
       }
-
+      else{
+        $.ajax({
+          method: "POST",
+          url: "/articles/" + articleID,
+          data: {
+            comment: $("#comment-text").val()
+          }
+        })
+        .done(function(response){
+          console.log("Successfully posted: " + response);
+          $("#comment-text").val("");
+        });
+      }
     });
 
-    modal.find('.modal-title').text('Notes for ' + title)
-    // modal.find('.modal-body input').val(recipient)
+    $('div').on("click", "button.deleteCommentBtn", function(event){
+
+      var commentID = $(this).attr('data-comment-id');
+      console.log(commentID);
+      $.ajax({
+        method: "DELETE",
+        url: "/comments/" + commentID
+      })
+      .done(function(response){
+        console.log("Deleted!");
+
+      });
+    });
 
   });
 
-  $('.addNoteBtn').on('click', function(){
+  $('.noteBtn').on('hidden.bs.modal', function (event) {
+    location.reload();
+  });
 
+  $(".deleteArticleBtn").on("click", function(event){
+    var articleID = $(this).parent().children('h2').attr('data-id');
+    $.ajax({
+      method: "DELETE",
+      url: "/articles/" + articleID
+    })
+    .done(function(response){
+      console.log("Deleted!");
+      location.reload();
+    });
   })
-
 
 });

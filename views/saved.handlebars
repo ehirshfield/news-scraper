@@ -9,8 +9,9 @@
             <div class="savedArt">
               <h2 data-id='{{this._id}}'>{{this.title}}</h2>
               <p class="articleLink">{{this.link}}</p>
-              <img {{bindAttr src='this.thumbnail'}} width='70' height='70'>
+              <!-- <img {{bindAttr src='this.thumbnail'}} width='70' height='70'> -->
               <button class="btn btn-primary" data-toggle="modal" data-target=".noteBtn">Notes</button>
+              <button class="btn btn-default deleteArticleBtn">Delete Saved</button>
             </div>
           {{/each}}
         {{else}}
@@ -25,22 +26,24 @@
   <div class="modal-dialog modal-lg" role="document">
      <div class="modal-content">
        <div class="modal-header">
-         <h4 class="modal-title" id="exampleModalLabel"></h4>
+         <h4 class="modal-title"></h4>
          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
            <span aria-hidden="true">&times;</span>
          </button>
        </div>
        <div class="modal-body">
+        <div class="comment-section">
+        </div>
          <form>
            <div class="form-group">
-             <label for="message-text" class="form-control-label">New Note:</label>
-             <textarea class="form-control" id="message-text"></textarea>
+             <label for="comment-text" class="form-control-label">New Comment:</label>
+             <textarea class="form-control" id="comment-text"></textarea>
            </div>
          </form>
        </div>
        <div class="modal-footer">
          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-         <button type="button" class="btn btn-primary addNoteBtn">Add Note</button>
+         <button type="button" class="btn btn-primary addNoteBtn" data-dismiss="modal">Add Note</button>
        </div>
      </div>
   </div>

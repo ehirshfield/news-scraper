@@ -18,11 +18,10 @@ var ArticleSchema = new Schema({
   thumbnail: {
     type: String
   },
-  // This only saves one note's ObjectId, ref refers to the Comment model
-  comment: {
+  comment: [{
     type: Schema.Types.ObjectId,
     ref: "Comment"
-  }
+  }]
 });
 
 // Create the Article model with the ArticleSchema

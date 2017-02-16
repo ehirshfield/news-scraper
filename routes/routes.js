@@ -95,7 +95,7 @@ app.post("/save", function(req, res){
 
   })
 
-  app.get("/api/articles/:id", function(req, res){
+  app.get("/articles/:id", function(req, res){
     Article.findOne({"_id": req.params.id})
     .populate("comment")
     .exec(function(err, doc){
@@ -103,13 +103,35 @@ app.post("/save", function(req, res){
         console.log("database error: " + err);
       }
       else {
-        res.send(doc);
+        console.log(doc);
+        res.json(doc);
       }
     })
 
   });
 
-  app.delete("/api/articles/:id", function(req, res){
+  app.post("/articles/:id", function(req, res){
+    var newComment = new Comment(req.body);
+
+    newComment.save(function(err, doc){
+      if (err){
+        console.log(err);
+      }
+      else{
+        Article.findOneAndUpdate({"_id": req.params.id}, {$push: {"comment": doc._id}}, {new: true})
+        .exec(function(err, doc){
+          if (err){
+            console.log("Error updating comment: " + err);
+          }
+          else{
+            res.send(doc);
+          }
+        })
+      }
+    })
+  })
+
+  app.delete("/articles/:id", function(req, res){
     Article.findOneAndRemove({"_id": req.params.id})
     .exec(function(err, doc){
       if (err) {
@@ -119,8 +141,18 @@ app.post("/save", function(req, res){
         res.send(doc);
       }
     })
-
   });
 
+  app.delete("/comments/:id", function(req, res){
+    Comment.findOneAndRemove({"_id": req.params.id})
+    .exec(function(err, doc){
+      if (err) {
+        console.log("database error: " + err);
+      }
+      else {
+        res.send(doc);
+      }
+    })
+  });
 
 }
