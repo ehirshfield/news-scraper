@@ -79,6 +79,48 @@ app.post("/save", function(req, res){
     });
   });
 
+  //Go to the saved articles page
+  app.get("/articles", function(req, res){
+
+    Article.find({})
+    .exec(function(err, doc){
+      if (err) {
+        console.log(err)
+      }
+      else{
+        console.log(doc);
+        res.render("saved", {article: doc});
+      }
+    });
+
+  })
+
+  app.get("/api/articles/:id", function(req, res){
+    Article.findOne({"_id": req.params.id})
+    .populate("comment")
+    .exec(function(err, doc){
+      if (err) {
+        console.log("database error: " + err);
+      }
+      else {
+        res.send(doc);
+      }
+    })
+
+  });
+
+  app.delete("/api/articles/:id", function(req, res){
+    Article.findOneAndRemove({"_id": req.params.id})
+    .exec(function(err, doc){
+      if (err) {
+        console.log("database error: " + err);
+      }
+      else {
+        res.send(doc);
+      }
+    })
+
+  });
 
 
 }

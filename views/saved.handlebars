@@ -1,0 +1,47 @@
+<h1>Saved Articles</h1>
+
+<div class="container">
+  <div class="row">
+    <div class="col-lg-4">
+        {{#if article}}
+        <div class="savedArticleContainer">
+          {{#each article}}
+            <div class="savedArt">
+              <h2 data-id='{{this._id}}'>{{this.title}}</h2>
+              <p class="articleLink">{{this.link}}</p>
+              <img {{bindAttr src='this.thumbnail'}} width='70' height='70'>
+              <button class="btn btn-primary" data-toggle="modal" data-target=".noteBtn">Notes</button>
+            </div>
+          {{/each}}
+        {{else}}
+          <h1>Please go to the homepage and scrape and save articles!</h1>
+        {{/if}}
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade noteBtn" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+     <div class="modal-content">
+       <div class="modal-header">
+         <h4 class="modal-title" id="exampleModalLabel"></h4>
+         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+           <span aria-hidden="true">&times;</span>
+         </button>
+       </div>
+       <div class="modal-body">
+         <form>
+           <div class="form-group">
+             <label for="message-text" class="form-control-label">New Note:</label>
+             <textarea class="form-control" id="message-text"></textarea>
+           </div>
+         </form>
+       </div>
+       <div class="modal-footer">
+         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+         <button type="button" class="btn btn-primary addNoteBtn">Add Note</button>
+       </div>
+     </div>
+  </div>
+</div>
