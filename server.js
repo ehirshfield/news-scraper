@@ -19,7 +19,7 @@ app.use(bodyParser.urlencoded({
 app.use(express.static(path.join(__dirname, '/public')));
 
 // Database configuration with mongoose
-mongoose.connect("mongodb://localhost/scraper");
+mongoose.connect("mongodb://heroku_6ql27mx9:fqo5abimhif9bdpf69qbeeov1k@ds153729.mlab.com:53729/heroku_6ql27mx9");
 var db = mongoose.connection;
 
 // Show any mongoose errors
