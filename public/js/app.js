@@ -19,7 +19,7 @@ $(document).ready(function(){
 
     if (articleData.thumbnail === undefined || articleData.thumbnail === ""){
       articleData.thumbnail = "/img/ocean.jpg";
-      var captionDiv = $('<div class="caption article-title">').append('<a href='+articleData.link+'><h3 clss="article-title">'+ articleData.title + '</h3></a>')
+      var captionDiv = $('<div class="caption article-title">').append('<h3 clss="article-title">'+ articleData.title + '</h3>')
       .append('<p hidden>'+ articleData.link +'</p>')
       .append("<div class='saveDiv'><a class='btn btn-default saveBtn'>Save</a></div>");
       $('<div class="indivArticle thumbnail col-md-4">').append('<img src=' + articleData.thumbnail + ' data-holder-rendered="true" style="height: 100px; width: 100px; display: block;">')
@@ -27,7 +27,7 @@ $(document).ready(function(){
       .appendTo(".articleContainer");
     }
     else{
-      var captionDiv = $('<div class="caption article-title">').append('<a href='+articleData.link+'><h3 clss="article-title">'+ articleData.title + '</h3></a>')
+      var captionDiv = $('<div class="caption article-title">').append('<h3 clss="article-title">'+ articleData.title + '</h3>')
       .append('<p hidden>'+ articleData.link +'</p>')
       .append("<div class='saveDiv'><a class='btn btn-default saveBtn'>Save</a></div>");
       $('<div class="indivArticle thumbnail col-md-4">').append('<img src=' + articleData.thumbnail + ' data-holder-rendered="true" style="height: 100px; width: 100px; display: block;">')
