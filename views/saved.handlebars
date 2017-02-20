@@ -1,4 +1,4 @@
-<h1>Saved Articles</h1>
+<h1>Saved Articles - Some articles may not have valid links due to domain being from reddit</h1>
 
 <div class="container">
   <div class="row">
@@ -7,7 +7,7 @@
         <div class="savedArticleContainer">
           {{#each article}}
             <div class="savedArt">
-              <h2 data-id='{{this._id}}'>{{this.title}}</h2>
+              <a href="{{this.link}}"><h2 data-id='{{this._id}}'>{{this.title}}</h2></a>
               <p class="articleLink">{{this.link}}</p>
               <!-- <img {{bindAttr src='this.thumbnail'}} width='70' height='70'> -->
               <button class="btn btn-primary" data-toggle="modal" data-target=".noteBtn">Notes</button>

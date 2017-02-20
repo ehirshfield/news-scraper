@@ -25,6 +25,7 @@ var options = { server: { socketOptions: { keepAlive: 300000, connectTimeoutMS: 
 
 // Database configuration with mongoose
 mongoose.connect("mongodb://heroku_6ql27mx9:fqo5abimhif9bdpf69qbeeov1k@ds153729.mlab.com:53729/heroku_6ql27mx9", options);
+// mongoose.connect("mongodb://localhost");
 var db = mongoose.connection;
 
 // Show any mongoose errors

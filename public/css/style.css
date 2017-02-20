@@ -1,8 +1,50 @@
 .home-background {
-    height: 400px;
+    height: 450px;
     background: url('/img/ocean.jpg') center center no-repeat scroll;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     background-size: cover;
     -o-background-size: cover;
+}
+
+.loadAnimation {
+    display:    none;
+    position:   fixed;
+    z-index:    1000;
+    top:        0;
+    left:       0;
+    height:     100%;
+    width:      100%;
+    background: rgba( 255, 255, 255, .8 )
+                url('/img/ajax-loader.gif')
+                50% 50%
+                no-repeat;
+}
+
+/* When the body has the loading class, we turn
+   the scrollbar off with overflow:hidden */
+body.loading {
+    overflow: hidden;
+}
+
+/* Anytime the body has the loading class, our
+   modal element will be visible */
+body.loading .loadAnimation {
+    display: block;
+}
+
+.alertMessage {
+  margin-top: 300px;
+  margin-left: 625px;
+
+}
+
+.indivArticle {
+  overflow: auto;
+  height: 300px;
+  width: 300px;
+}
+
+.article-title {
+  overflow: hidden;
 }

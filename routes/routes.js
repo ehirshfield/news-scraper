@@ -74,7 +74,7 @@ app.post("/save", function(req, res){
         console.log(error);
       }
       else{
-        console.log("success!");
+        res.send(docs);
       }
     });
   });
