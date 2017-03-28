@@ -25,6 +25,7 @@
    the scrollbar off with overflow:hidden */
 body.loading {
     overflow: hidden;
+
 }
 
 /* Anytime the body has the loading class, our
@@ -34,9 +35,9 @@ body.loading .loadAnimation {
 }
 
 .alertMessage {
-  margin-top: 300px;
-  margin-left: 625px;
-
+  margin-top: 250px;
+  /*margin-left: 625px;*/
+  text-align: center;
 }
 
 .indivArticle {
@@ -47,4 +48,12 @@ body.loading .loadAnimation {
 
 .article-title {
   overflow: hidden;
+}
+
+.title-container {
+  text-align: center;
+
+}
+.valign {
+  margin-top: 250px;
 }
